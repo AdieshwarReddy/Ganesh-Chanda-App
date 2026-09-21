@@ -70,10 +70,10 @@ async def startup_event():
                 target_amount=200000.00,
                 upi_id="ganeshchanda@upi",
                 upi_name="Ganesh Utsav Committee",
-                organizer_name="Ganesh Utsav Committee",
-                contact_phone="9999999999",
-                contact_email="contact@ganeshchanda.com",
-                festival_description="Ganesh Chaturthi is one of the most celebrated festivals in India. Your donation helps us organize cultural programs, decorations, prasad distribution, and community events.",
+                organizer_name="Mogili Adieshwar Reddy & Committee",
+                contact_phone="901411xxxx",
+                contact_email="mogiliadieshwarreddy5919@gmail.com",
+                festival_description="Ganesh Chaturthi is one of the most celebrated festivals in India. Your donation helps us organize cultural programs, decorations, prasad distribution, and community events in Hyderabad.",
                 is_active=True,
             )
             db.add(campaign)
