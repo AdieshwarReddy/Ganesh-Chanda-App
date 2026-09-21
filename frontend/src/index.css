@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans bg-gray-950 text-gray-100 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-saffron-500 to-gold-500 text-white font-semibold px-6 py-3 rounded-xl
+           hover:from-saffron-600 hover:to-gold-600 transition-all duration-300 shadow-lg
+           hover:shadow-saffron-500/25 hover:-translate-y-0.5 active:translate-y-0 
+           disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none;
+  }
+  .btn-secondary {
+    @apply bg-white/10 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-xl
+           border border-white/20 hover:bg-white/20 transition-all duration-300
+           hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .btn-danger {
+    @apply bg-crimson-600 text-white font-semibold px-4 py-2 rounded-lg
+           hover:bg-crimson-700 transition-all duration-200;
+  }
+  .btn-success {
+    @apply bg-emerald-600 text-white font-semibold px-4 py-2 rounded-lg
+           hover:bg-emerald-700 transition-all duration-200;
+  }
+  .card {
+    @apply bg-gray-900/80 backdrop-blur-sm border border-white/10 rounded-2xl p-6
+           shadow-xl hover:border-saffron-500/30 transition-all duration-300;
+  }
+  .card-glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl;
+  }
+  .input-field {
+    @apply w-full bg-gray-800/80 border border-white/10 rounded-xl px-4 py-3 text-white
+           placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-saffron-500/50
+           focus:border-saffron-500/50 transition-all duration-200;
+  }
+  .input-label {
+    @apply block text-sm font-medium text-gray-300 mb-1.5;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-display font-bold text-white;
+  }
+  .section-subtitle {
+    @apply text-gray-400 text-lg mt-3 max-w-2xl mx-auto;
+  }
+  .badge-pending {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+           bg-yellow-500/20 text-yellow-300 border border-yellow-500/30;
+  }
+  .badge-verified {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+           bg-emerald-500/20 text-emerald-300 border border-emerald-500/30;
+  }
+  .badge-rejected {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+           bg-crimson-500/20 text-crimson-300 border border-crimson-500/30;
+  }
+  .stat-card {
+    @apply bg-gray-900/80 border border-white/10 rounded-2xl p-5 
+           hover:border-saffron-500/30 transition-all duration-300;
+  }
+  .nav-link {
+    @apply text-gray-300 hover:text-saffron-400 font-medium transition-colors duration-200;
+  }
+  .festival-border {
+    @apply border-l-4 border-saffron-500 pl-4;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-saffron-400 via-gold-400 to-saffron-500 bg-clip-text text-transparent;
+  }
+  .bg-dark-card {
+    background: linear-gradient(135deg, rgba(17,17,27,0.9) 0%, rgba(26,26,46,0.9) 100%);
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+::-webkit-scrollbar-thumb {
+  background: #f97316;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ea6c00;
+}
+
+/* Progress bar animation */
+.progress-bar {
+  background: linear-gradient(90deg, #f97316, #f59e0b, #f97316);
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
