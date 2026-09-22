@@ -1,17 +1,13 @@
-import { Outlet, Link, useLocation, useEffect } from 'react-router-dom'
+import { Outlet, Link, useLocation, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Settings, LogOut, BarChart2, Users, ChevronRight } from 'lucide-react'
+import { Users, Settings, LogOut, BarChart2, ChevronRight } from 'lucide-react'
 
 export default function AdminLayout() {
-  const { user, isLoggedIn, loginAsDev, logout } = useAuth()
+  const { user, isAdmin, isLoggedIn, logout } = useAuth()
   const location = useLocation()
 
-  // Auto-login as admin if not already logged in — no login page needed
-  useEffect(() => {
-    if (!isLoggedIn) {
-      loginAsDev({ email: 'admin@ganeshchanda.com', name: 'Mogili Adieshwar Reddy', role: 'ADMIN' })
-    }
-  }, [isLoggedIn, loginAsDev])
+  if (!isLoggedIn) return <Navigate to="/admin/login" replace />
+  if (!isAdmin) return <Navigate to="/" replace />
 
   const navItems = [
     { to: '/admin/dashboard', icon: BarChart2, label: 'Dashboard' },
@@ -55,6 +51,7 @@ export default function AdminLayout() {
           ))}
         </nav>
 
+        {/* User info + logout */}
         <div className="p-4 border-t border-white/10">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-8 h-8 bg-saffron-500/20 rounded-full flex items-center justify-center text-sm">
@@ -65,13 +62,13 @@ export default function AdminLayout() {
               <div className="text-gold-400 text-xs">Admin</div>
             </div>
           </div>
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-sm text-gray-400 hover:text-saffron-400 transition-colors w-full"
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 text-sm text-gray-400 hover:text-red-400 transition-colors w-full"
           >
             <LogOut size={15} />
-            Back to Site
-          </Link>
+            Logout
+          </button>
         </div>
       </aside>
 

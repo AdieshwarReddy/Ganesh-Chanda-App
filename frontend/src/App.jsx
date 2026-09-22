@@ -11,10 +11,12 @@ import Home from './pages/Home'
 import Donate from './pages/Donate'
 import DonationSuccess from './pages/DonationSuccess'
 import Contributors from './pages/Contributors'
+import Login from './pages/Login'
 import MyDonations from './pages/MyDonations'
 import NotFound from './pages/NotFound'
 
 // Admin pages
+import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminDonations from './pages/admin/AdminDonations'
 import AdminSettings from './pages/admin/AdminSettings'
@@ -37,13 +39,14 @@ export default function App() {
             <Route path="/donate" element={<Donate />} />
             <Route path="/donation-success" element={<DonationSuccess />} />
             <Route path="/contributors" element={<Contributors />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/my-donations" element={<MyDonations />} />
-            {/* Redirect old login routes to home */}
-            <Route path="/login" element={<Navigate to="/" replace />} />
           </Route>
 
-          {/* Admin Routes - no login needed, auto-login on access */}
-          <Route path="/admin/login" element={<Navigate to="/admin/dashboard" replace />} />
+          {/* Admin Auth */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+
+          {/* Admin Routes (protected) */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="/admin/dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />} />
