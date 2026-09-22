@@ -1,21 +1,12 @@
 import { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
-import { Menu, X, Heart, LogOut, User, LayoutDashboard } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
+import { Menu, X, Heart, LayoutDashboard } from 'lucide-react'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const { user, isAdmin, isLoggedIn, logout } = useAuth()
   const location = useLocation()
-  const navigate = useNavigate()
 
   const isActive = (path) => location.pathname === path
-
-  const handleLogout = () => {
-    logout()
-    navigate('/')
-    setOpen(false)
-  }
 
   const navItems = [
     { to: '/', label: 'Home' },
@@ -53,37 +44,13 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="hidden md:flex items-center gap-3">
-            {isLoggedIn ? (
-              <>
-                {isAdmin && (
-                  <Link
-                    to="/admin/dashboard"
-                    className="flex items-center gap-1.5 text-sm text-gold-400 hover:text-gold-300 font-medium transition-colors"
-                  >
-                    <LayoutDashboard size={15} />
-                    Admin
-                  </Link>
-                )}
-                <Link
-                  to="/my-donations"
-                  className="flex items-center gap-1.5 text-sm text-gray-300 hover:text-white transition-colors"
-                >
-                  <User size={15} />
-                  {user?.name?.split(' ')[0]}
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-crimson-400 transition-colors"
-                >
-                  <LogOut size={15} />
-                  Logout
-                </button>
-              </>
-            ) : (
-              <Link to="/login" className="text-sm text-gray-300 hover:text-white transition-colors">
-                Login
-              </Link>
-            )}
+            <Link
+              to="/admin/dashboard"
+              className="flex items-center gap-1.5 text-sm text-gold-400 hover:text-gold-300 font-medium transition-colors"
+            >
+              <LayoutDashboard size={15} />
+              Admin
+            </Link>
             <Link to="/donate" className="btn-primary py-2 px-4 text-sm flex items-center gap-1.5">
               <Heart size={14} />
               Donate Now
@@ -114,25 +81,9 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="border-t border-white/10 pt-3 space-y-2">
-            {isLoggedIn ? (
-              <>
-                {isAdmin && (
-                  <Link to="/admin/dashboard" onClick={() => setOpen(false)} className="block py-2 text-sm text-gold-400 font-medium">
-                    Admin Dashboard
-                  </Link>
-                )}
-                <Link to="/my-donations" onClick={() => setOpen(false)} className="block py-2 text-sm text-gray-300">
-                  My Donations
-                </Link>
-                <button onClick={handleLogout} className="block py-2 text-sm text-crimson-400 w-full text-left">
-                  Logout
-                </button>
-              </>
-            ) : (
-              <Link to="/login" onClick={() => setOpen(false)} className="block py-2 text-sm text-gray-300">
-                Login with Google
-              </Link>
-            )}
+            <Link to="/admin/dashboard" onClick={() => setOpen(false)} className="block py-2 text-sm text-gold-400 font-medium">
+              Admin Dashboard
+            </Link>
             <Link to="/donate" onClick={() => setOpen(false)} className="btn-primary py-2 px-4 text-sm w-full text-center block">
               Donate Now
             </Link>
