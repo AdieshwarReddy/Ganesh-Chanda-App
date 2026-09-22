@@ -6,8 +6,9 @@ const API_BASE = import.meta.env.VITE_API_URL || '/api'
 const api = axios.create({
   baseURL: API_BASE,
   headers: { 'Content-Type': 'application/json' },
-  timeout: 30000,
+  timeout: 90000, // 90 seconds — Render free tier needs up to 60s to wake up
 })
+
 
 // Attach JWT token to every request if present
 api.interceptors.request.use((config) => {

@@ -25,12 +25,16 @@ export default function Login() {
         role: 'USER',
       })
       navigate('/my-donations')
-    } catch {
-      // toast error handled in context
+    } catch (err) {
+      const msg = err?.code === 'ECONNABORTED' || err?.message?.includes('timeout')
+        ? 'Server is waking up... Please wait 30 seconds and try again 🙏'
+        : 'Login failed. Please check your internet and try again.'
+      import('react-hot-toast').then(({ default: toast }) => toast.error(msg, { duration: 6000 }))
     } finally {
       setIsSubmitting(false)
     }
   }
+
 
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4 py-12">
@@ -43,8 +47,9 @@ export default function Login() {
           </p>
 
           {loading || isSubmitting ? (
-            <div className="py-6">
-              <LoadingSpinner text="Logging in..." />
+            <div className="py-6 text-center">
+              <LoadingSpinner text="Connecting to server..." />
+              <p className="text-gray-500 text-xs mt-3">⏳ First visit may take up to 60 seconds.<br/>Server is waking up — please wait 🙏</p>
             </div>
           ) : (
             <form onSubmit={handleQuickLogin} className="space-y-4 text-left">
